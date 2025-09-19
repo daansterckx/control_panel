@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Device Control Panel</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>Device Control Panel</h1>
+            <div class="connection-status status-connected" id="vpnStatus">
+                VPN Connected
+            </div>
+        </header>
+
+        <nav class="navigation">
+            <ul class="nav-list">
+                <li class="nav-item">
+                    <a href="#overview" class="nav-link active" data-page="overview">Overview</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#device1" class="nav-link" data-page="device1">Router</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#device2" class="nav-link" data-page="device2">NAS Server</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#device3" class="nav-link" data-page="device3">Security Camera</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#device4" class="nav-link" data-page="device4">Smart Switch</a>
+                </li>
+            </ul>
+        </nav>
+
+        <main class="main-content">
+            <!-- Overview Page -->
+            <div id="overview" class="page active">
+                <div class="welcome-section">
+                    <h2>Hello, Welcome to the Control Panel</h2>
+                    <p>Monitor and control your devices remotely through secure VPN connection.</p>
+                </div>
+
+                <div class="overview-grid">
+                    <div class="overview-card">
+                        <h3>Device Status</h3>
+                        <div class="status-summary">
+                            <div class="status-item">
+                                <span class="device-status status-online"></span>
+                                <span>3 Online</span>
+                            </div>
+                            <div class="status-item">
+                                <span class="device-status status-offline"></span>
+                                <span>1 Offline</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="overview-card">
+                        <h3>Network Status</h3>
+                        <div class="network-info">
+                            <p>VPN: <span class="status-text connected">Connected</span></p>
+                            <p>Latency: <span id="latency">45ms</span></p>
+                            <p>Last Update: <span id="lastUpdate">Just now</span></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="logs-section">
+                    <div class="logs-header">
+                        <h3>Recent Activity Logs</h3>
+                        <button class="btn btn-small" onclick="clearLogs()">Clear Logs</button>
+                    </div>
+                    <div class="logs-container" id="logsContainer">
+                        <div class="log-entry">
+                            <span class="log-timestamp">14:32:15</span>
+                            <span class="log-success">Router - Connection established</span>
+                        </div>
+                        <div class="log-entry">
+                            <span class="log-timestamp">14:31:42</span>
+                            <span class="log-info">NAS Server - Status check completed</span>
+                        </div>
+                        <div class="log-entry">
+                            <span class="log-timestamp">14:30:18</span>
+                            <span class="log-warning">Security Camera - High CPU usage detected</span>
+                        </div>
+                        <div class="log-entry">
+                            <span class="log-timestamp">14:29:55</span>
+                            <span class="log-error">Smart Switch - Connection timeout</span>
+                        </div>
+                        <div class="log-entry">
+                            <span class="log-timestamp">14:28:33</span>
+                            <span class="log-success">VPN - Tunnel established</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Device Pages (Hidden by default) -->
+            <div id="device1" class="page">
+                <div class="device-control-page">
+                    <h2>Router Control</h2>
+                    <div class="device-card">
+                        <div class="device-header">
+                            <span class="device-name">Main Router</span>
+                            <span class="device-status status-online"></span>
+                        </div>
+                        <div class="device-info">
+                            <p>IP: 192.168.1.1</p>
+                            <p>Model: TP-Link AX6000</p>
+                            <p>Uptime: 15 days, 3 hours</p>
+                        </div>
+                        <div class="device-controls">
+                            <button class="btn btn-success">Reboot</button>
+                            <button class="btn">Reset Config</button>
+                            <button class="btn btn-danger">Shutdown</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="device2" class="page">
+                <div class="device-control-page">
+                    <h2>NAS Server Control</h2>
+                    <div class="device-card">
+                        <div class="device-header">
+                            <span class="device-name">Synology NAS</span>
+                            <span class="device-status status-online"></span>
+                        </div>
+                        <div class="device-info">
+                            <p>IP: 192.168.1.100</p>
+                            <p>Storage: 8TB (65% used)</p>
+                            <p>Services: All running</p>
+                        </div>
+                        <div class="device-controls">
+                            <button class="btn">Backup Now</button>
+                            <button class="btn">Check Health</button>
+                            <button class="btn btn-danger">Shutdown</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="device3" class="page">
+                <div class="device-control-page">
+                    <h2>Security Camera Control</h2>
+                    <div class="device-card">
+                        <div class="device-header">
+                            <span class="device-name">Front Door Camera</span>
+                            <span class="device-status status-online"></span>
+                        </div>
+                        <div class="device-info">
+                            <p>IP: 192.168.1.201</p>
+                            <p>Resolution: 4K</p>
+                            <p>Recording: Active</p>
+                        </div>
+                        <div class="device-controls">
+                            <button class="btn">View Live</button>
+                            <button class="btn">Start Recording</button>
+                            <button class="btn btn-danger">Disable</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="device4" class="page">
+                <div class="device-control-page">
+                    <h2>Smart Switch Control</h2>
+                    <div class="device-card">
+                        <div class="device-header">
+                            <span class="device-name">TP-Link Smart Switch</span>
+                            <span class="device-status status-offline"></span>
+                        </div>
+                        <div class="device-info">
+                            <p>IP: 192.168.1.150</p>
+                            <p>Ports: 24 (16 active)</p>
+                            <p>Status: Offline</p>
+                        </div>
+                        <div class="device-controls">
+                            <button class="btn" disabled>Reconnect</button>
+                            <button class="btn" disabled>Port Config</button>
+                            <button class="btn btn-danger" disabled>Reset</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

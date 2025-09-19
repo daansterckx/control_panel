@@ -3,34 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Device Control Panel</title>
+    <title>PenTest Device Control Panel</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛡️</text></svg>">
 </head>
 <body>
     <div class="container">
         <header class="header">
-            <h1>Device Control Panel</h1>
+            <h1>🛡️ PenTest Control Panel</h1>
             <div class="connection-status status-disconnected" id="vpnStatus">
-                VPN Disconnected
+                Master Disconnected
             </div>
         </header>
 
         <nav class="navigation">
             <ul class="nav-list">
                 <li class="nav-item">
-                    <a href="#overview" class="nav-link active" data-page="overview">Overview</a>
+                    <a href="#overview" class="nav-link active" data-page="overview" title="Ctrl+1">
+                        📊 Overview
+                    </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#device1" class="nav-link" data-page="device1">Router</a>
+                    <a href="#device1" class="nav-link" data-page="device1" title="Ctrl+2">
+                        🎯 Keylogger
+                    </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#device2" class="nav-link" data-page="device2">NAS Server</a>
+                    <a href="#device2" class="nav-link" data-page="device2" title="Ctrl+3">
+                        ⌨️ Keystroke Injector
+                    </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#device3" class="nav-link" data-page="device3">Security Camera</a>
+                    <a href="#device3" class="nav-link" data-page="device3" title="Ctrl+4">
+                        🔌 Ethernet Tap
+                    </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#device4" class="nav-link" data-page="device4">Smart Switch</a>
+                    <a href="#device4" class="nav-link" data-page="device4" title="Ctrl+5">
+                        📡 Evil Twin AP
+                    </a>
                 </li>
             </ul>
         </nav>
@@ -39,15 +50,72 @@
             <!-- Overview Page -->
             <div id="overview" class="page active">
                 <div class="welcome-section">
-                    <h2>Hello, Welcome to the Control Panel</h2>
-                    <p>Monitor and control your devices remotely through secure VPN connection.</p>
+                    <h2>Welcome to PenTest Control</h2>
+                    <p>Remotely control your penetration testing devices through master device endpoints.</p>
+                    <p class="warning-text">⚠️ For authorized penetration testing only</p>
+                    <p class="architecture-info">🏗️ Master Device Architecture: Individual endpoints per device</p>
                 </div>
 
                 <div class="overview-grid">
                     <div class="overview-card">
-                        <h3>Device Status</h3>
+                        <h3>📊 Device Status</h3>
                         <div class="status-summary">
                             <div class="status-item">
+                                <span class="device-status status-online"></span>
+                                <span>0 Online</span>
+                            </div>
+                            <div class="status-item">
+                                <span class="device-status status-offline"></span>
+                                <span>4 Offline</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="overview-card">
+                        <h3>🌐 Network Status</h3>
+                        <div class="network-info">
+                            <p>Master Device: <span class="status-text disconnected">Disconnected</span></p>
+                            <p>Latency: <span id="latency">N/A</span></p>
+                            <p>Last Update: <span id="lastUpdate">Never</span></p>
+                        </div>
+                    </div>
+
+                    <div class="overview-card">
+                        <h3>⚙️ System Info</h3>
+                        <div class="system-info">
+                            <p>Master Device: <span id="masterStatus" class="status-text disconnected">Checking...</span></p>
+                            <p>Auto-Update: <span>Every 5 seconds</span></p>
+                            <p>Active Instances: <span>0/0</span></p>
+                        </div>
+                    </div>
+
+                    <div class="overview-card">
+                        <h3>🔗 Endpoints</h3>
+                        <div class="endpoints-info">
+                            <p>Keylogger: <span>/keylogger</span></p>
+                            <p>Keystroke Injector: <span>/keystroke-injector</span></p>
+                            <p>Ethernet Tap: <span>/ethernet-tap</span></p>
+                            <p>Evil Twin AP: <span>/evil-twin</span></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="logs-section">
+                    <div class="logs-header">
+                        <h3>📝 Activity Logs</h3>
+                        <div class="logs-controls">
+                            <button class="btn btn-small" onclick="clearLogs()">Clear Logs</button>
+                            <button class="btn btn-small" onclick="startPeriodicUpdates()">Resume Updates</button>
+                            <button class="btn btn-small btn-danger" onclick="stopPeriodicUpdates()">Pause Updates</button>
+                        </div>
+                    </div>
+                    <div class="logs-container" id="logsContainer">
+                        <div class="log-entry">
+                            <span class="log-info">Initializing control panel...</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
                                 <span class="device-status status-online"></span>
                                 <span>0 Online</span>
                             </div>
@@ -86,37 +154,136 @@
                         <!-- Logs will be dynamically populated by JavaScript -->
                     </div>
                 </div>
-            </div>
-
-            <!-- Router Control Page -->
+            <!-- Keylogger Control Page -->
             <div id="device1" class="page">
                 <div class="device-control-page">
-                    <h2>Router Control</h2>
+                    <h2>🎯 Keylogger Control</h2>
                     <div class="device-card">
                         <div class="device-header">
-                            <span class="device-name">Main Router</span>
+                            <span class="device-name">Hardware Keylogger</span>
                             <span class="device-status status-offline"></span>
                         </div>
                         <div class="device-info">
-                            <p>IP: 192.168.1.1</p>
-                            <p>Status: Offline</p>
-                            <p>Type: Router</p>
+                            <p>Endpoint: <span>/keylogger</span></p>
+                            <p>Status: <span class="status-text disconnected">Offline</span></p>
+                            <p>Instances: <span>0/0</span></p>
+                            <p>Last Seen: <span>Never</span></p>
                         </div>
                         <div class="device-controls">
-                            <button class="btn btn-success" disabled>Reboot</button>
-                            <button class="btn" disabled>Reset Config</button>
-                            <button class="btn btn-danger" disabled>Shutdown</button>
+                            <button class="btn btn-success" disabled>Start Logging</button>
+                            <button class="btn btn-danger" disabled>Stop Logging</button>
+                            <button class="btn" disabled>Download Logs</button>
+                            <button class="btn" disabled>Clear Buffer</button>
+                        </div>
+                        <div class="instances-section">
+                            <h4>🔧 Active Instances</h4>
+                            <div class="instances-container">
+                                <p class="no-instances">No active instances</p>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- NAS Server Control Page -->
+            <!-- Keystroke Injector Control Page -->
             <div id="device2" class="page">
                 <div class="device-control-page">
-                    <h2>NAS Server Control</h2>
+                    <h2>⌨️ Keystroke Injector Control</h2>
                     <div class="device-card">
                         <div class="device-header">
+                            <span class="device-name">USB Keystroke Injector</span>
+                            <span class="device-status status-offline"></span>
+                        </div>
+                        <div class="device-info">
+                            <p>Endpoint: <span>/keystroke-injector</span></p>
+                            <p>Status: <span class="status-text disconnected">Offline</span></p>
+                            <p>Instances: <span>0/0</span></p>
+                            <p>Last Seen: <span>Never</span></p>
+                        </div>
+                        <div class="device-controls">
+                            <button class="btn btn-success" disabled>Inject Payload</button>
+                            <button class="btn" disabled>Load Script</button>
+                            <button class="btn" disabled>List Payloads</button>
+                            <button class="btn btn-danger" disabled>Stop Injection</button>
+                        </div>
+                        <div class="instances-section">
+                            <h4>🔧 Active Instances</h4>
+                            <div class="instances-container">
+                                <p class="no-instances">No active instances</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Ethernet Tap Control Page -->
+            <div id="device3" class="page">
+                <div class="device-control-page">
+                    <h2>🔌 Ethernet Tap Control</h2>
+                    <div class="device-card">
+                        <div class="device-header">
+                            <span class="device-name">Network Tap Device</span>
+                            <span class="device-status status-offline"></span>
+                        </div>
+                        <div class="device-info">
+                            <p>Endpoint: <span>/ethernet-tap</span></p>
+                            <p>Status: <span class="status-text disconnected">Offline</span></p>
+                            <p>Instances: <span>0/0</span></p>
+                            <p>Last Seen: <span>Never</span></p>
+                        </div>
+                        <div class="device-controls">
+                            <button class="btn btn-success" disabled>Start Capture</button>
+                            <button class="btn btn-danger" disabled>Stop Capture</button>
+                            <button class="btn" disabled>Download PCAP</button>
+                            <button class="btn" disabled>Monitor Mode</button>
+                        </div>
+                        <div class="instances-section">
+                            <h4>🔧 Active Instances</h4>
+                            <div class="instances-container">
+                                <p class="no-instances">No active instances</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Evil Twin AP Control Page -->
+            <div id="device4" class="page">
+                <div class="device-control-page">
+                    <h2>📡 Evil Twin AP Control</h2>
+                    <div class="device-card">
+                        <div class="device-header">
+                            <span class="device-name">Rogue Access Point</span>
+                            <span class="device-status status-offline"></span>
+                        </div>
+                        <div class="device-info">
+                            <p>Endpoint: <span>/evil-twin</span></p>
+                            <p>Status: <span class="status-text disconnected">Offline</span></p>
+                            <p>Instances: <span>0/0</span></p>
+                            <p>Last Seen: <span>Never</span></p>
+                        </div>
+                        <div class="device-controls">
+                            <button class="btn btn-success" disabled>Start AP</button>
+                            <button class="btn btn-danger" disabled>Stop AP</button>
+                            <button class="btn" disabled>View Clients</button>
+                            <button class="btn" disabled>Clone Network</button>
+                            <button class="btn btn-danger" disabled>Deauth Clients</button>
+                        </div>
+                        <div class="instances-section">
+                            <h4>🔧 Active Instances</h4>
+                            <div class="instances-container">
+                                <p class="no-instances">No active instances</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
                             <span class="device-name">Synology NAS</span>
                             <span class="device-status status-offline"></span>
                         </div>

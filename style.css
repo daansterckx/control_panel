@@ -533,10 +533,220 @@ body {
     }
 }
 
-/* Loading States */
+.warning-text {
+    color: #ffc107;
+    font-weight: bold;
+    margin-top: 10px;
+    text-shadow: 0 0 5px rgba(255, 193, 7, 0.3);
+}
+
+.architecture-info {
+    color: #17a2b8;
+    font-weight: 500;
+    margin-top: 5px;
+    font-size: 0.9em;
+}
+
+.endpoints-info p {
+    margin-bottom: 8px;
+    display: flex;
+    justify-content: space-between;
+    font-family: 'Courier New', monospace;
+    font-size: 0.85em;
+}
+
+.endpoints-info span {
+    color: #28a745;
+    font-weight: bold;
+}
+
+.logs-controls {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.instances-section {
+    margin-top: 25px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.instances-section h4 {
+    margin-bottom: 15px;
+    color: #e3f2fd;
+    font-size: 1.1em;
+}
+
+.instances-container {
+    max-height: 250px;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.3) transparent;
+}
+
+.instances-container::-webkit-scrollbar {
+    width: 6px;
+}
+
+.instances-container::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.instances-container::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 3px;
+}
+
+.no-instances {
+    color: rgba(255, 255, 255, 0.6);
+    font-style: italic;
+    text-align: center;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    border: 1px dashed rgba(255, 255, 255, 0.2);
+}
+
+.instance-item {
+    padding: 15px;
+    margin-bottom: 12px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+}
+
+.instance-item:hover {
+    background: rgba(255, 255, 255, 0.08);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+.instance-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.instance-name {
+    font-weight: 600;
+    color: #e3f2fd;
+    font-size: 0.95em;
+}
+
+.instance-status {
+    padding: 4px 12px;
+    border-radius: 15px;
+    font-size: 0.8em;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.instance-status.status-running,
+.instance-status.status-active {
+    background: linear-gradient(45deg, #28a745, #20c997);
+    color: white;
+    box-shadow: 0 0 8px rgba(40, 167, 69, 0.3);
+}
+
+.instance-status.status-stopped,
+.instance-status.status-inactive {
+    background: linear-gradient(45deg, #dc3545, #c82333);
+    color: white;
+    box-shadow: 0 0 8px rgba(220, 53, 69, 0.3);
+}
+
+.instance-details {
+    margin-bottom: 12px;
+}
+
+.instance-details small {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.8em;
+    line-height: 1.4;
+}
+
+.instance-controls {
+    display: flex;
+    gap: 8px;
+    justify-content: flex-end;
+}
+
+.instance-controls .btn {
+    min-width: 65px;
+    padding: 6px 12px;
+    font-size: 0.75em;
+    flex: none;
+}
+
+.instance-btn {
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Notifications */
+.notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 15px 20px;
+    border-radius: 10px;
+    color: white;
+    font-weight: bold;
+    z-index: 1000;
+    animation: slideIn 0.3s ease-out;
+    max-width: 350px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.notification-info {
+    background: linear-gradient(45deg, #17a2b8, #138496);
+}
+
+.notification-success {
+    background: linear-gradient(45deg, #28a745, #1e7e34);
+}
+
+.notification-warning {
+    background: linear-gradient(45deg, #ffc107, #e0a800);
+    color: #000;
+}
+
+.notification-error {
+    background: linear-gradient(45deg, #dc3545, #c82333);
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* Loading states */
 .loading {
-    opacity: 0.6;
+    position: relative;
     pointer-events: none;
+    opacity: 0.7;
+}
+
+.loading::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.3);
+    border-radius: inherit;
+    z-index: 10;
 }
 
 .loading::after {
@@ -551,6 +761,7 @@ body {
     border-top: 2px solid #ffffff;
     border-radius: 50%;
     animation: spin 1s linear infinite;
+    z-index: 11;
 }
 
 @keyframes spin {

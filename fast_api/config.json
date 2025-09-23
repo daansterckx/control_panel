@@ -1,0 +1,44 @@
+{
+  "api": {
+    "title": "PenTest Master Device API",
+    "version": "1.0.0",
+    "host": "0.0.0.0",
+    "port": 8080,
+    "debug": true
+  },
+  "devices": {
+    "mqtt_broker": {
+      "host": "localhost",
+      "port": 1883,
+      "username": null,
+      "password": null,
+      "topics": {
+        "status": "devices/{device_type}/status",
+        "commands": "devices/{device_type}/commands",
+        "responses": "devices/{device_type}/responses"
+      }
+    },
+    "timeout": 10,
+    "retry_attempts": 3
+  },
+  "security": {
+    "enable_auth": false,
+    "api_key": null,
+    "allowed_origins": ["*"],
+    "rate_limiting": {
+      "enabled": false,
+      "requests_per_minute": 60
+    }
+  },
+  "logging": {
+    "level": "INFO",
+    "file": "/tmp/logs/master_device.log",
+    "max_size_mb": 10,
+    "backup_count": 5
+  },
+  "file_storage": {
+    "downloads_path": "/tmp/downloads",
+    "max_file_size_mb": 100,
+    "allowed_extensions": [".txt", ".pcap", ".log", ".json"]
+  }
+}

@@ -1,6 +1,6 @@
 // Configuration
 const CONFIG = {
-    masterDeviceUrl: 'http://192.168.1.10:8080', // Master device endpoint
+    masterDeviceUrl: 'http://localhost:8080', // Master device endpoint (FastAPI server)
     updateInterval: 5000, // 5 seconds
     logMaxEntries: 100,
     authToken: null, // Authentication token if needed
